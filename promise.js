@@ -362,7 +362,6 @@ function resolvePromise(promise2, x, resolve, reject) {
       } catch (e) {
         if (called) return;
         called = true;
-
         reject(e);
       }
     } else {

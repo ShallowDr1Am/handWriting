@@ -42,3 +42,37 @@ Array.prototype._map = function (cb, thisBinding) {
   return result;
 };
 console.log(arr._map(item => item + 1, [3, 4]))
+
+// foreach
+Array.prototype._forEach = function (callback) {
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback)
+  }
+  for (let i = 0; i < this.length; i++) {
+    callback(this[i], i, this)
+  }
+}
+
+// reduce
+Array.prototype._reduce = function (callback, ...args) {
+  let start = 0, pre;
+  if (args.length) {
+    pre = args[0]
+  } else {
+    pre = this[0]
+    start = 1
+  }
+  for (let i = start; i < this.length; i++) {
+    pre = callback(pre, this[i], i, this)
+  }
+  return pre
+}
+
+// filter
+Array.prototype._filter = function (callback) {
+  const res = []
+  for (let i = 0; i < this.length; i++) {
+    callback(this[i], i, this) && res.push(this[i])
+  }
+  return res
+}
